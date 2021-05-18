@@ -1,0 +1,23 @@
+<div class="flex p-2 md:flex-row flex-col">
+  <div
+    *ngFor="let item of this.items"
+    class="
+      flex-1
+      border-2 border-gray-800
+      rounded-lg
+      px-3
+      py-2
+      m-1
+      hover:bg-gray-800
+      hover:text-gray-200
+    "
+    [ngClass]="
+      item.id === this.currentItem?.id
+        ? 'bg-gray-800 text-gray-200'
+        : 'cursor-pointer text-gray-700'
+    "
+    [routerLink]="item.link"
+  >
+    {{ item.title }}
+  </div>
+</div>
