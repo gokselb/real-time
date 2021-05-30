@@ -10,8 +10,15 @@ export class BaseAlgorithm {
     this.taskList = taskList;
     this.findLcm();
     this.findUtilization();
+    this.assignColors();
     this.taskList.forEach((task) => {
       task.scheduleTasks(this.lcm);
+    });
+  }
+
+  public assignColors(): void {
+    this.taskList.forEach((task, index) => {
+      task.color = UtilsService.getColors()[index];
     });
   }
 
@@ -26,7 +33,7 @@ export class BaseAlgorithm {
     const utilization = this.taskList
       .map((task) => task.capacity / task.period)
       .reduce((a, b) => a + b, 0);
-    this.usedTimeSlots = (utilization * this.lcm);
+    this.usedTimeSlots = utilization * this.lcm;
     this.utilization = utilization * 100;
     return this;
   }
@@ -35,5 +42,9 @@ export class BaseAlgorithm {
   public findLcm() {
     this.lcm = UtilsService.findLCM(this.taskList.map((task) => task.period));
     return this;
+  }
+
+  public isSchedulable(): boolean {
+    return this.utilization < 100;
   }
 }
