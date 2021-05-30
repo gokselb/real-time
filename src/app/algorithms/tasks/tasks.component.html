@@ -1,0 +1,47 @@
+<div class="flex mt-3 mb-4">
+  <div class="flex-1">Name of task</div>
+  <div class="flex-1">Capacity</div>
+  <div class="flex-1">Period</div>
+  <div class="flex-1">Deadline (if different)</div>
+  <div class="opacity-0 flex-shrink-0 p-2">X</div>
+</div>
+<app-task-view
+  class="block mb-2"
+  *ngFor="let task of this.currentTasks"
+  [task]="task"
+  (removeClicked)="this.removeTask(task)"
+></app-task-view>
+<div class="flex">
+  <button
+    class="
+      bg-blue-50
+      p-1
+      border-2 border-blue-600
+      text-blue-800
+      rounded-lg
+      m-1
+      hover:border-opacity-100
+      hover:text-opacity-100
+      border-opacity-30
+      text-opacity-30
+      w-1/3
+    "
+    (click)="this.addNewTask()"
+  >
+    Add Task
+  </button>
+  <button
+    class="
+      bg-green-50
+      p-1
+      border-2 border-green-600
+      text-green-800
+      rounded-lg
+      m-1
+      flex-grow
+    "
+    (click)="this.scheduleClicked.emit(this.currentTasks)"
+  >
+    Schedule
+  </button>
+</div>

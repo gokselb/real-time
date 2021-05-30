@@ -1,0 +1,53 @@
+<div class="flex mt-3 mb-4" *ngIf="this.task">
+  <div class="relative flex-1 border-b-2 focus-within:border-blue-500 mt-3">
+    <input
+      type="text"
+      [(ngModel)]="this.task.name"
+      name="name"
+      placeholder="Name"
+      class="block w-full appearance-none focus:outline-none bg-transparent"
+    />
+  </div>
+  <div class="relative flex-1 border-b-2 focus-within:border-blue-500 mt-3">
+    <input
+      type="number"
+      [(ngModel)]="this.task.capacity"
+      name="capacity"
+      placeholder="Capacity"
+      class="block w-full appearance-none focus:outline-none bg-transparent"
+    />
+  </div>
+  <div class="relative flex-1 border-b-2 focus-within:border-blue-500 mt-3">
+    <input
+      type="number"
+      [(ngModel)]="this.task.period"
+      (ngModelChange)="this.task.deadline = this.task.period"
+      name="period"
+      placeholder="Period"
+      class="block w-full appearance-none focus:outline-none bg-transparent"
+    />
+  </div>
+  <div class="relative flex-1 border-b-2 focus-within:border-blue-500 mt-3">
+    <input
+      type="number"
+      [(ngModel)]="this.task.deadline"
+      name="deadline"
+      placeholder="Deadline"
+      class="block w-full appearance-none focus:outline-none bg-transparent"
+    />
+  </div>
+  <button
+    class="
+      flex-shrink-0
+      p-2
+      bg-red-50
+      border-red-400
+      text-red-800
+      shadow-md
+      border-1
+    "
+    (click)="this.removeClicked.emit(true)"
+  >
+    X
+  </button>
+</div>
