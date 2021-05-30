@@ -2,5 +2,86 @@
   <div class="w-1/3">
     <app-tasks (scheduleClicked)="this.schedule($event)"></app-tasks>
   </div>
-  <div class="flex-grow"></div>
+  <div class="w-2/3 pl-3">
+    <div class="text-center">
+      <ng-container *ngIf="this.instance && !this.instance?.isSchedulable()">
+        <div class="bg-red-300 text-red-900 p-2">
+          <p class="text-lg">UTILIZATION</p>
+          <p class="text-2xl">
+            {{ this.instance?.utilization | number: '.2' }}%
+          </p>
+          <p>
+            Utilization is over 100. This task set cannot be scheduled with the
+            <abbr title="Earliest deadline first scheduling">EDF</abbr>.
+          </p>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="this.instance?.isSchedulable()">
+        <div class="bg-green-300 text-green-900 p-2 px-52">
+          <p class="text-lg">UTILIZATION</p>
+          <p class="text-2xl">
+            {{ this.instance?.utilization | number: '.2' }}%
+          </p>
+          <p>
+            This task set is schedulable with the
+            <abbr title="Earliest deadline first scheduling">EDF</abbr>.
+            Scheduling pattern can repeat every {{ this.instance?.lcm }} time
+            slices. {{ this.instance?.usedTimeSlots }} time slices will be used
+            by these tasks in an interval of {{ this.instance?.lcm }}.
+          </p>
+        </div>
+      </ng-container>
+    </div>
+    <div
+      *ngIf="this.instance?.isSchedulable()"
+      class="overflow-x-scroll p-3 pl-10 pb-16"
+    >
+      <div class="w-max text-center">
+        <table>
+          <tr>
+            <td
+              *ngFor="let task of this.result; let i = index"
+              class="border-gray-100 border-t-0 border-2 p-2 relative h-16 shad"
+              [ngStyle]="{
+                background: task.color ? task.color : 'gray',
+                'min-width': '60px'
+              }"
+            >
+              <span
+                class="
+                  badge
+                  absolute
+                  bg-gray-100
+                  p-1
+                  text-green-900
+                  -left-5
+                  -bottom-5
+                  shadow-lg
+                "
+              >
+                {{ task.time }}
+              </span>
+              {{ task.runningTaskName }}
+              <ng-container *ngIf="this.result.length - 1 == i">
+                <span
+                  class="
+                    badge
+                    absolute
+                    bg-gray-100
+                    p-1
+                    text-green-900
+                    -right-5
+                    -bottom-5
+                    shadow-lg
+                  "
+                >
+                  {{ this.result.length }}
+                </span>
+              </ng-container>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

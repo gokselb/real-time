@@ -6,6 +6,7 @@ export class Task {
   public period: number;
   public deadline: number;
   public scheduledTasks: ScheduledTask[];
+  public color!: string;
   public constructor(
     name: string,
     capacity: number,
@@ -27,7 +28,8 @@ export class Task {
           this.name,
           index * this.period,
           index * this.period + this.deadline,
-          this.capacity
+          this.capacity,
+          this.color
         )
       );
     }
