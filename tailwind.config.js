@@ -3,10 +3,17 @@ module.exports = {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
   },
-  purge: ["./src/**/*.html", "./src/**/*.scss"],
+  purge: ['./src/**/*.html', './src/**/*.scss'],
   theme: {
-    extend: {},
+    extend: {
+      transformOrigin: {
+        0: '0%',
+      },
+      zIndex: {
+        '-1': '-1',
+      },
+    },
   },
-  variants: {},
+  variants: { borderColor: ['responsive', 'hover', 'focus', 'focus-within'] },
   plugins: [],
 };
