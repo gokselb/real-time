@@ -26,6 +26,7 @@ export class Task {
       this.scheduledTasks.push(
         new ScheduledTask(
           this.name,
+          this.period,
           index * this.period,
           index * this.period + this.deadline,
           this.capacity,

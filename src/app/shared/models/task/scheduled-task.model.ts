@@ -1,5 +1,6 @@
 export class ScheduledTask {
   public name: string;
+  public period: number;
   public startTime: number;
   public deadline: number;
   public capacity: number;
@@ -8,12 +9,14 @@ export class ScheduledTask {
 
   public constructor(
     name: string,
+    period: number,
     startTime: number,
     deadline: number,
     capacity: number,
     color: string
   ) {
     this.name = name;
+    this.period = period;
     this.startTime = startTime;
     this.deadline = deadline;
     this.capacity = capacity;
